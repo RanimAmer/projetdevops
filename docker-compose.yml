@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: "db"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "AZERTY123456@"
+      MYSQL_ROOT_PASSWORD: "AZERTY123456@"  # Password matching your application.properties
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  tp-foyer:
+    image: yosra/tp-foyer:1.0.0  # Replace with your Docker image name and tag
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/db?createDatabaseIfNotExist=true"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "AZERTY123456@"
+      SERVER_PORT: 8089
+      SERVER_SERVLET_CONTEXT_PATH: "/tpfoyer"
+    ports:
+      - "8089:8089"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
