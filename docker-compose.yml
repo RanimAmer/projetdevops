@@ -1,7 +1,7 @@
 services:
   tp-foyer-app:
     image: houssem167/tp-foyer-backend:latest
-    container_name: tp-foyer-app-container
+    container_name: tp-foyer-app-container-unique
     ports:
       - "8089:8089"
     environment:
