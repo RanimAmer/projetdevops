@@ -42,7 +42,7 @@ services:
     ports:
       - "8089:8089"
     depends_on:
-      - mysql
+      - mysqldb
 volumes:
   mysql-data:
 networks:
