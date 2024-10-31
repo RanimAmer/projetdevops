@@ -1,5 +1,3 @@
-version: '3.8'  # Optional: specify the version
-
 services:
   tp-foyer-app:
     image: houssem167/tp-foyer-backend:latest
