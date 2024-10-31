@@ -23,6 +23,18 @@ services:
       - "8089:8089"
     depends_on:
       - mysql
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9091:9090"  # Expose Prometheus web UI on 9091
 
+    grafana:
+      image: grafana/grafana:latest
+      ports:
+        - "3001:3000"  # Expose Grafana web UI on port 3000
+      depends_on:
+        - prometheus
 volumes:
   mysql_data:
