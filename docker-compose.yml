@@ -3,25 +3,39 @@ services:
     image: mysql:5.7
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - db:/var/lib/mysql
     networks:
       - mynetwork
 
   backend:
-    networks:
-      - mynetwork
+    image: houssem167/tp-foyer-backend:latest
+    restart: on-failure
     depends_on:
       - mysqldb
-    image: houssem167/tp-foyer-backend:latest# Votre image backend Spring
-    restart: on-failure
     ports:
-      - "8087:8089"
+      - "8089:8089"
     environment:
-      SPRING_APPLICATION_JSON: '{ "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true", "spring.datasource.username" : "root", "spring.datasource.password" : "root", "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL8Dialect", "spring.jpa.hibernate.ddl-auto" : "update"}'
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SERVER_PORT: 8089
+      SERVER_SERVLET_CONTEXT_PATH: /tpfoyer
     stdin_open: true
     tty: true
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  db:
+
