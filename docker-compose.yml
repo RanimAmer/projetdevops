@@ -1,29 +1,27 @@
 services:
-  tp-foyer-app:
-    image: houssem167/tp-foyer-backend:latest
-    container_name: tp-foyer-app-container-unique
-    ports:
-      - "8089:8089"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: ''
-      SPRING_JPA_SHOW_SQL: 'true'
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-    depends_on:
-      - db  # Fixed space issue here
-
-  db:
-    image: mysql:8.0
-    container_name: mysql-container
-    ports:
-      - "3306:3306"
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ''
       MYSQL_DATABASE: db
+    ports:
+      - "3307:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - db:/var/lib/mysql
+    networks:
+      - mynetwork
 
-volumes:
-  mysql_data:
-
+  backend:
+    networks:
+      - mynetwork
+    depends_on:
+      - mysqldb
+    image: houssem167/tp-foyer-backend:latest# Votre image backend Spring
+    restart: on-failure
+    ports:
+      - "8087:8089"
+    environment:
+      SPRING_APPLICATION_JSON: '{ "spring.datasource.url"  : "jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true", "spring.datasource.username" : "root", "spring.datasource.password" : "root", "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL8Dialect", "spring.jpa.hibernate.ddl-auto" : "update"}'
+    stdin_open: true
+    tty: true
