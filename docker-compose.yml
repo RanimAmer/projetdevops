@@ -13,7 +13,7 @@ services:
       - SPRING_JPA_SHOW_SQL=true
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
-      - db
+      -mysqldb
 
   db:
     image: mysql:8.0
