@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   tp-foyer:
     image: ranim1707/tp-foyer:5.0.0
@@ -7,7 +6,7 @@ services:
     depends_on:
       - mysqldb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/ranim
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3309/ranim
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD:
   mysqldb:
@@ -17,8 +16,4 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE:
     ports:
-
-      - "3306:3306"
-
       - "3309:3306"
-
