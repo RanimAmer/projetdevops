@@ -1,0 +1,40 @@
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+    ports:
+      - "3307:3306"
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - mynetwork
+
+  backend:
+    image: ghofranefaj/tp-foyer:5.0.0
+    restart: on-failure
+    ports:
+      - "8087:8089"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+      SERVER_PORT: 8089
+      SERVER_SERVLET_CONTEXT_PATH: "/tpfoyer"
+    depends_on:
+      - mysqldb
+    stdin_open: true
+    tty: true
+    networks:
+      - mynetwork
+
+volumes:
+  db:
+
+
+networks:
+  mynetwork:
+    driver: bridge
