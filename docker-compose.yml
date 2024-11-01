@@ -7,14 +7,14 @@ services:
       MYSQL_DATABASE: "db"
       MYSQL_USER: "root"
       MYSQL_PASSWORD: "AZERTY123456@"
-      MYSQL_ROOT_PASSWORD: "AZERTY123456@"  # Password matching your application.properties
+      MYSQL_ROOT_PASSWORD: "AZERTY123456@"  # Must match application.properties
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 
   tp-foyer:
-    image: yosra/tp-foyer:1.0.0  # Replace with your Docker image name and tag
+    image: yosra/tp-foyer:1.0.0  # Your Docker image name and tag
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/db?createDatabaseIfNotExist=true"
       SPRING_DATASOURCE_USERNAME: "root"
@@ -25,23 +25,24 @@ services:
       - "8089:8089"
     depends_on:
       - mysql
-
-  prometheus:
-    image: prom/prometheus
-    ports:
-      - "9091:9090"
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Mount your Prometheus config file
-
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3001:3000"
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin  # Set the default password for Grafana
-    volumes:
-      - grafana_data:/var/lib/grafana
+#
+#  prometheus:
+#    image: prom/prometheus
+#    ports:
+#      - "9091:9090"  # Prometheus UI accessible at http://localhost:9091
+#    volumes:
+#      - ./prometheus.yml:/etc/prometheus/prometheus.yml  # Ensure prometheus.yml is in the same directory as this docker-compose.yml
+#
+#  grafana:
+#    image: grafana/grafana
+#    ports:
+#      - "3001:3000"  # Grafana UI accessible at http://localhost:3001
+#    environment:
+#      - GF_SECURITY_ADMIN_USER=admin  # Default username
+#      - GF_SECURITY_ADMIN_PASSWORD=admin  # Default password
+#    volumes:
+#      - grafana_data:/var/lib/grafana
 
 volumes:
   mysql_data:
-  grafana_data:
+#  grafana_data:
