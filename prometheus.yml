@@ -2,15 +2,12 @@ global:
   scrape_interval: 15s  # Set the scrape interval to every 15 seconds
 
 scrape_configs:
-  # Scraping the tp-foyer application for metrics
   - job_name: 'tp-foyer'
-    metrics_path: '/actuator/prometheus'  # Path where Spring Boot metrics are exposed
+    metrics_path: '/actuator/prometheus'  # This should be the path where metrics are exposed in tp-foyer
     static_configs:
-      - targets: ['localhost:8089']  # Change 'tp-foyer' to 'localhost' if running locally, or update the host to match your setup
+      - targets: ['tp-foyer:8089']  # Target tp-foyer on port 8089
 
-  # Scraping Prometheus itself for metrics
   - job_name: 'prometheus'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['localhost:9091']  # Prometheus metrics endpoint
-
+      - targets: ['localhost:9090']
