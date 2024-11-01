@@ -18,4 +18,4 @@ services:
       MYSQL_ROOT_PASSWORD: your_password
       MYSQL_DATABASE: your_database
     ports:
-      - "3307:3306"
+      - "3309:3306"
