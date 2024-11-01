@@ -6,10 +6,11 @@ scrape_configs:
   - job_name: 'tp-foyer'
     metrics_path: '/actuator/prometheus'  # Path where Spring Boot metrics are exposed
     static_configs:
-      - targets: ['tp-foyer:8089']  # Change 'tp-foyer' to 'localhost' if running locally, or update the host to match your setup
+      - targets: ['localhost:8089']  # Change 'tp-foyer' to 'localhost' if running locally, or update the host to match your setup
 
   # Scraping Prometheus itself for metrics
   - job_name: 'prometheus'
     metrics_path: '/metrics'
     static_configs:
-      - targets: ['localhost:9090']  # Prometheus metrics endpoint
+      - targets: ['localhost:9091']  # Prometheus metrics endpoint
+
