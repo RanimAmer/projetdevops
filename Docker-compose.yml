@@ -7,10 +7,9 @@ services:
     depends_on:
       - mysqldb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/your_database
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/ranim
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: your_password
-
+      SPRING_DATASOURCE_PASSWORD:
   mysqldb:
     image: mysql:5.7
     restart: always
