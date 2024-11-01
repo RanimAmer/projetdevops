@@ -14,7 +14,7 @@ services:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: your_password
-      MYSQL_DATABASE: your_database
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE:
     ports:
-      - "3309:3306"
+      - "3306:3306"
