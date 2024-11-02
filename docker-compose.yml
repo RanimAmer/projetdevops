@@ -13,7 +13,9 @@ services:
     networks:
       - mynetwork
 
+
   backend:
+    container_name: backend
     image: ghofranefaj/tp-foyer:5.0.0
     restart: on-failure
     ports:
@@ -33,7 +35,6 @@ services:
 
 volumes:
   db:
-
 
 networks:
   mynetwork:
