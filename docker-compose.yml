@@ -32,6 +32,20 @@ services:
     tty: true
     networks:
       - mynetwork
+  frontend:
+    build:
+      context: "DevopsFrontend/DevopsFront" # Assurez-vous que cela correspond à l'emplacement de votre Dockerfile
+      dockerfile: Dockerfile # Assurez-vous que cela correspond au nom de votre Dockerfile
+    image: ghofranefaj/angular-frontend:latest # Votre image frontend Angular
+    ports:
+      - "4200:80" # Exposez le frontend sur le port 80
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - mynetwork
+    environment:
+      - API_URL=http://backend:8088/tpfoyer/etudiant/
 
 volumes:
   db:
