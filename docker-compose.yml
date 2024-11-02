@@ -1,6 +1,8 @@
 version: '3.8'
 
 services:
+
+
   mysql:
     image: mysql:8.0
     environment:
@@ -28,6 +30,7 @@ services:
 
   prometheus:
     image: prom/prometheus
+    container_name: projectdevops_prometheus_1
     ports:
       - "9090:9090"  # Prometheus UI accessible at http://localhost:9091
     volumes:
@@ -35,6 +38,7 @@ services:
 
   grafana:
     image: grafana/grafana
+    container_name: projectdevops_grafana_1
     ports:
       - "3000:3000"  # Grafana UI accessible at http://localhost:3001
     environment:
