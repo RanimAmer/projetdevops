@@ -13,7 +13,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-  tp-foyer:
+  spring-boot-app:
     image: caeser9/tp-foyer:1.0.0
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/db?createDatabaseIfNotExist=true"
@@ -25,6 +25,13 @@ services:
       - "8089:8089"
     depends_on:
       - mysql
+
+  angular-app:
+    image: your-dockerhub-username/angular-app:latest
+    ports:
+      - "4200:80"
+    depends_on:
+      - spring-boot-app
 
   prometheus:
     image: prom/prometheus:latest

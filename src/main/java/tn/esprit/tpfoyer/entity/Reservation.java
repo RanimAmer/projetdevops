@@ -24,21 +24,8 @@ public class Reservation {
     Date anneeUniversitaire;
     boolean estValide;
 
-
-
-
-
-
-
-
-
-
-
     @ManyToMany
     Set<Etudiant> etudiants;
-
-
-
 
     /*@ToString.Exclude
     @JsonIgnore*/
