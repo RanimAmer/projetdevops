@@ -9,6 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD:
       MYSQL_DATABASE: ranim
     ports:
+<<<<<<< HEAD
       - "3307:3306"
     volumes:
       - db:/var/lib/mysql
@@ -27,6 +28,9 @@ services:
       SPRING_DATASOURCE_PASSWORD: ""
       SERVER_PORT: 8089
       SERVER_SERVLET_CONTEXT_PATH: "/tpfoyer"
+=======
+      - "8085:8080"
+>>>>>>> e95e895dbf0f8f9f3a07bda902af7cf15bd12e4e
     depends_on:
       - mysqldb
     stdin_open: true
