@@ -25,6 +25,11 @@
         </repository>
     </distributionManagement>
     <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version> <!-- Assurez-vous d'utiliser une version compatible -->
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
