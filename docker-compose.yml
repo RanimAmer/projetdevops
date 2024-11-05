@@ -12,8 +12,11 @@ services:
       MYSQL_ROOT_PASSWORD: "AZERTY123456@"  # Must match application.properties
     ports:
       - "3307:3306"
+    networks:
+      - app-network
     volumes:
       - mysql_data:/var/lib/mysql
+    restart: always
 
   tp-foyer:
     image: yosra/tp-foyer:1.0.0  # Your Docker image name and tag
@@ -25,6 +28,8 @@ services:
       SERVER_SERVLET_CONTEXT_PATH: "/tpfoyer"
     ports:
       - "8089:8089"
+    networks:
+      - app-network
     depends_on:
       - mysql
 
@@ -33,3 +38,7 @@ services:
 volumes:
   mysql_data:
   grafana_data:
+
+networks:
+  app-network:
+    driver: bridge
