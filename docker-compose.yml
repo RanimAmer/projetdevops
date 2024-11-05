@@ -28,6 +28,8 @@ services:
     depends_on:
       - mysql
 
+    restart: always
+
 volumes:
   mysql_data:
   grafana_data:
