@@ -26,26 +26,5 @@ services:
     depends_on:
       - mysql
 
-  angular-app:
-    image: your-dockerhub-username/angular-app:latest
-    ports:
-      - "4200:80"
-    depends_on:
-      - spring-boot-app
-
-  prometheus:
-    image: prom/prometheus:latest
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9091:9090"
-
-  grafana:
-    image: grafana/grafana:latest
-    ports:
-      - "3001:3000"
-    depends_on:
-      - prometheus
-
 volumes:
   mysql_data:
